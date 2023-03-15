@@ -20,11 +20,17 @@ class options : AppCompatActivity() {
 //        }
 
         val about_button : Button = findViewById(R.id.about)
+        val game_button : Button = findViewById(R.id.new_game)
 
         about_button.setOnClickListener {
             val dialog = Dialog(this)
             dialog.setContentView(R.layout.activity_about)
             dialog.show()
+        }
+
+        game_button.setOnClickListener {
+            val intent = Intent(this, game::class.java)
+            startActivity(intent)
         }
 
     }
