@@ -1,5 +1,6 @@
 package com.example.dice_application
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,8 +22,9 @@ class options : AppCompatActivity() {
         val about_button : Button = findViewById(R.id.about)
 
         about_button.setOnClickListener {
-            val intent = Intent(this, about::class.java)
-            startActivity(intent)
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.activity_about)
+            dialog.show()
         }
 
     }

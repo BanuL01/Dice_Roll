@@ -14,6 +14,8 @@
         android:layout_height="300dp"
         android:layout_marginStart="72dp"
         android:layout_marginTop="-20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.218"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/about_editor" />
@@ -22,8 +24,8 @@
         android:id="@+id/name_editor"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="4dp"
         android:text="Banuji Liyanwala"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -36,8 +38,8 @@
         android:id="@+id/west_id"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="48dp"
         android:text="20210342"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -50,8 +52,8 @@
         android:id="@+id/stu_id"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="76dp"
         android:text="w1867098"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -65,17 +67,16 @@
         android:layout_width="350dp"
         android:layout_height="250dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="128dp"
         android:text="I confirm that I understand what plagiarism is and have read and
 understood the section on Assessment Offences in the Essential
 Information for Students. The work that I have submitted is
 entirely my own. Any work from other authors is duly referenced
 and acknowledged."
-        android:textAlignment=""
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintHorizontal_bias="0.714"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_editor" />
 
