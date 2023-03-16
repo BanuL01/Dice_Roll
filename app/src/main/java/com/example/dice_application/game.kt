@@ -12,7 +12,6 @@ class game : AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
 
-
         var computer_list = mutableListOf<Int>()
         var user_list = mutableListOf<Int>()
 
@@ -32,7 +31,7 @@ class game : AppCompatActivity() {
         var temp_list = mutableListOf<Int>()
 
         for (i in 0 until 5) {
-            val randomNumber = Random().nextInt(10) + 1
+            var randomNumber = Random().nextInt(6) + 1
             temp_list.add(randomNumber)
         }
         return  temp_list
