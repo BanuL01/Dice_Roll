@@ -1,5 +1,7 @@
 package com.example.dice_application
 
+import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,6 +20,7 @@ class game : AppCompatActivity() {
     var dice_select = mutableListOf<Boolean>(false,false,false,false,false)
     var round_count = 1
     var user_dice_List: MutableList<ImageView>? =null
+    var target_score = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,7 @@ class game : AppCompatActivity() {
 
         score.isEnabled = false
         round_number.setText(round_count.toString())
-        
+
         throw_button.setOnClickListener {
             computer_list = genarateList()
             score.isEnabled = true
@@ -90,6 +93,8 @@ class game : AppCompatActivity() {
                     }
                 }
 
+                winCheck()
+
                 //reset part
                 dice_select = mutableListOf<Boolean>(false,false,false,false,false)
                 for (index in 0 until 5){
@@ -119,9 +124,15 @@ class game : AppCompatActivity() {
                 dice_select[index] = false
                 user_dice_List?.get(index)?.setBackgroundColor(Color.TRANSPARENT)
             }
+            for (i in 0 until 5){
+                user_dice_List!![i].isClickable = false
+            }
+
             com_score_text.setText(com_total.toString())
             user_score_text.setText(user_total.toString())
 
+
+            winCheck()
 
 //            if(com_total.toString().length == 1){
 //                com_score_text.setText("00" + com_total.toString())
@@ -149,6 +160,30 @@ class game : AppCompatActivity() {
                 selectImage(i)
             }
            user_dice_List!![i].isClickable = false
+        }
+    }
+
+    private fun winCheck() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.activity_result)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setOnCancelListener{
+            val intent = Intent(this, options::class.java)
+            startActivity(intent)
+        }
+        if (user_total >= target_score) {
+            if (user_total == com_total){
+                //
+            }
+            else if (user_total > com_total) {
+                dialog.show()
+            }
+            else{
+                var result = dialog.findViewById(R.id.win_text) as TextView
+                result.setText("YOU LOST")
+                result.setTextColor(Color.RED)
+                dialog.show()
+            }
         }
     }
 
@@ -195,10 +230,6 @@ class game : AppCompatActivity() {
         }
         return  temp_list
     }
-
-
-
-
 
 
 }
