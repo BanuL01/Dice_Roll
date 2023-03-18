@@ -16,7 +16,7 @@ class game : AppCompatActivity() {
     var computer_list = mutableListOf<Int>()
     var user_list = mutableListOf<Int>()
     var dice_select = mutableListOf<Boolean>(false,false,false,false,false)
-
+    var round_count = 1
     var user_dice_List: MutableList<ImageView>? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +25,8 @@ class game : AppCompatActivity() {
 
         val throw_button : Button = findViewById(R.id.throw_button)
         val score : Button = findViewById(R.id.score)
+        val round_number : TextView = findViewById(R.id.round_num)
+
 
 
         val com_d1 : ImageView = findViewById(R.id.com_d1)
@@ -43,9 +45,12 @@ class game : AppCompatActivity() {
         val com_dice_list = mutableListOf<ImageView>(com_d1,com_d2,com_d3,com_d4,com_d5) //dice faces
         user_dice_List = mutableListOf<ImageView>(user_d1,user_d2,user_d3,user_d4,user_d5)
 
+        score.isEnabled = false
+        round_number.setText(round_count.toString())
+        
         throw_button.setOnClickListener {
-
             computer_list = genarateList()
+            score.isEnabled = true
 
             if(throw_button.text == "Throw") {
                 user_list = genarateList()
@@ -53,8 +58,8 @@ class game : AppCompatActivity() {
                 for (i in 0 until 5){
                     user_dice_List!![i].isClickable = true
                 }
-
             }
+
 
             else if (throw_button.text == "Rethrow"){
                 throw_button.setText("Rethrow Again")
@@ -67,6 +72,9 @@ class game : AppCompatActivity() {
                 }
             }
              else {
+                score.isEnabled = false
+                round_count++
+                round_number.setText(round_count.toString()) //setting the round number
                 throw_button.setText("Throw")
                 updateScore()
                 com_score_text.setText(com_total.toString())
@@ -81,7 +89,6 @@ class game : AppCompatActivity() {
                         user_list[i] = rannum
                     }
                 }
-
 
                 //reset part
                 dice_select = mutableListOf<Boolean>(false,false,false,false,false)
@@ -103,7 +110,15 @@ class game : AppCompatActivity() {
 
         score.setOnClickListener {
             updateScore()
-
+            round_count++
+            round_number.setText(round_count.toString()) //setting the round number
+            score.isEnabled = false
+            throw_button.setText("Throw")
+            dice_select = mutableListOf<Boolean>(false,false,false,false,false)
+            for (index in 0 until 5){
+                dice_select[index] = false
+                user_dice_List?.get(index)?.setBackgroundColor(Color.TRANSPARENT)
+            }
             com_score_text.setText(com_total.toString())
             user_score_text.setText(user_total.toString())
 
@@ -124,7 +139,6 @@ class game : AppCompatActivity() {
 //
 //            else user_score_text.setText(user_total.toString())
 //
-
             println(com_total)
             println(user_total)
 
@@ -136,8 +150,6 @@ class game : AppCompatActivity() {
             }
            user_dice_List!![i].isClickable = false
         }
-
-
     }
 
     private fun selectImage(index: Int) {
@@ -172,7 +184,6 @@ class game : AppCompatActivity() {
         }else if (randomValue==6){
             image.setImageResource(R.drawable.dice_6)
         }
-
     }
 
     private fun genarateList(): MutableList<Int> {
