@@ -21,14 +21,26 @@ class game : AppCompatActivity() {
     var round_count = 1
     var user_dice_List: MutableList<ImageView>? =null
     var target_score = 101
+    var isTie=false
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+
+        val ts_input : TextView = findViewById(R.id.ts_value)
+        val name_id : TextView = findViewById(R.id.user_text)
+        target_score = Integer.parseInt(intent.getStringExtra("key"))
+        ts_input.text = target_score.toString()
+        val user_text = (intent.getStringExtra("key2"))
+        name_id.text = user_text.toString()
+
         val throw_button : Button = findViewById(R.id.throw_button)
         val score : Button = findViewById(R.id.score)
         val round_number : TextView = findViewById(R.id.round_num)
+
 
 
 
@@ -53,13 +65,18 @@ class game : AppCompatActivity() {
 
         throw_button.setOnClickListener {
             computer_list = genarateList()
-            score.isEnabled = true
+            if (!isTie){
+                score.isEnabled = true
+            }
+
 
             if(throw_button.text == "Throw") {
                 user_list = genarateList()
-                throw_button.setText("Rethrow")
-                for (i in 0 until 5){
-                    user_dice_List!![i].isClickable = true
+                if (!isTie){
+                    throw_button.setText("Rethrow")
+                    for (i in 0 until 5){
+                        user_dice_List!![i].isClickable = true
+                    }
                 }
             }
 
@@ -86,6 +103,7 @@ class game : AppCompatActivity() {
                     user_dice_List!![i].isClickable = false
                 }
 
+
                 for (i in 0 until 5){
                     if (dice_select[i] == false){
                         var rannum = Random().nextInt(6) + 1
@@ -103,6 +121,17 @@ class game : AppCompatActivity() {
                 }
             }
 
+            if (isTie){
+                round_count++
+                round_number.setText(round_count.toString()) //setting the round number
+
+                updateScore()
+                com_score_text.setText(com_total.toString())
+                user_score_text.setText(user_total.toString())
+
+                winCheck()
+
+            }
             println(computer_list)
             println(user_list)
 
@@ -171,9 +200,11 @@ class game : AppCompatActivity() {
             val intent = Intent(this, options::class.java)
             startActivity(intent)
         }
+        user_total=150
+        com_total=150
         if (user_total >= target_score) {
             if (user_total == com_total){
-                //
+                isTie=true
             }
             else if (user_total > com_total) {
                 dialog.show()

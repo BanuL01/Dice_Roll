@@ -40,7 +40,7 @@
         android:layout_marginBottom="48dp"
         android:background="?android:attr/listDivider"
         android:backgroundTint="#400E32"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintBottom_toBottomOf="@+id/user_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView7" />
@@ -54,7 +54,7 @@
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@+id/user_d2"
         app:layout_constraintEnd_toEndOf="@+id/user_d4"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/user_text"
         app:layout_constraintTop_toTopOf="@+id/user_d2"
         app:srcCompat="@drawable/dice_1" />
 
@@ -67,7 +67,7 @@
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@+id/user_d5"
         app:layout_constraintEnd_toEndOf="@+id/throw_button"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/user_text"
         app:layout_constraintTop_toTopOf="@+id/user_d5"
         app:srcCompat="@drawable/dice_1" />
 
@@ -226,10 +226,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginTop="22dp"
+        android:layout_marginEnd="4dp"
         android:text="|"
         android:textColor="#0E0E0E"
         android:textSize="22dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/user_score"
         app:layout_constraintStart_toEndOf="@+id/com_score"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -238,7 +240,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="28dp"
         android:text="000"
         android:textColor="#7B2869"
         android:textSize="22sp"
@@ -250,7 +252,7 @@
         android:id="@+id/com_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="22dp"
         android:text="000"
         android:textColor="#CB1C8D"
@@ -260,7 +262,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/user_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
@@ -282,7 +284,7 @@
         android:textColor="#0E0E0E"
         android:textSize="22dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/user_text"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
