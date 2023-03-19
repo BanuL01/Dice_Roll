@@ -19,6 +19,7 @@ class game : AppCompatActivity() {
     var user_list = mutableListOf<Int>()
     var dice_select = mutableListOf<Boolean>(false,false,false,false,false)
     var round_count = 1
+    var win_count = 1
     var user_dice_List: MutableList<ImageView>? =null
     var target_score = 101
     var isTie=false
@@ -163,22 +164,6 @@ class game : AppCompatActivity() {
 
             winCheck()
 
-//            if(com_total.toString().length == 1){
-//                com_score_text.setText("00" + com_total.toString())
-//            }
-//            else if (com_total.toString().length == 2)
-//                com_score_text.setText("0" + com_total.toString())
-//
-//            else com_score_text.setText(com_total.toString())
-//
-//            if(user_total.toString().length == 1){
-//                user_score_text.setText("00" + user_total.toString())
-//            }
-//            else if (user_total.toString().length == 2)
-//                user_score_text.setText("0" + user_total.toString())
-//
-//            else user_score_text.setText(user_total.toString())
-//
             println(com_total)
             println(user_total)
 
@@ -193,31 +178,37 @@ class game : AppCompatActivity() {
     }
 
     private fun winCheck() {
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.activity_result)
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.setOnCancelListener{
-            val intent = Intent(this, options::class.java)
-            startActivity(intent)
-        }
-        user_total=150
-        com_total=150
-        if (user_total >= target_score) {
-            if (user_total == com_total){
-                isTie=true
-            }
-            else if (user_total > com_total) {
+//        user_total = 200
+//        com_total = 200
+
+        if (user_total >= target_score || com_total >= target_score) {
+            if (user_total > com_total) {
+                val dialog = Dialog(this)
+                dialog.setContentView(R.layout.activity_result)
+                dialog.setCancelable(true)
+                dialog.setCanceledOnTouchOutside(false)
+                dialog.setOnCancelListener {
+                    finish()
+                }
                 dialog.show()
-            }
-            else{
-                var result = dialog.findViewById(R.id.win_text) as TextView
-                result.setText("YOU LOST")
-                result.setTextColor(Color.RED)
+            } else if (user_total < com_total) {
+                val dialog = Dialog(this)
+                dialog.setContentView(R.layout.activity_result)
+                val resultText = dialog.findViewById<TextView>(R.id.win_text)
+                resultText.text = "YOU LOST"
+                resultText.setTextColor(Color.RED)
+                dialog.setCancelable(true)
+                dialog.setCanceledOnTouchOutside(false)
+                dialog.setOnCancelListener {
+                    finish()
+                }
                 dialog.show()
+
+            } else {
+                isTie = true
             }
         }
     }
-
     private fun selectImage(index: Int) {
         if (dice_select[index] == false){
             dice_select[index] = true
@@ -261,6 +252,7 @@ class game : AppCompatActivity() {
         }
         return  temp_list
     }
+
 
 
 }
