@@ -12,10 +12,37 @@
         android:id="@+id/target_score_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="number|textPersonName"
+        android:text="101"
+        app:layout_constraintStart_toStartOf="@+id/t_score_tv"
+        app:layout_constraintTop_toBottomOf="@+id/t_score_tv" />
+
+    <TextView
+        android:id="@+id/required2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="9dp"
+        android:text="required*"
+        android:textColor="#BF0808"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/target_score_input"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/t_score_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="13dp"
+        android:text="Target Score :"
+        android:textColor="#FF000000"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PersonName" />
 
@@ -23,36 +50,20 @@
         android:id="@+id/PersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="7dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/next_button_input"
-        android:layout_width="178dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="#8D7B68"
-        android:gravity="center"
-        android:text="Next"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:iconPadding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/target_score_input" />
+        app:layout_constraintTop_toBottomOf="@+id/name_tv" />
 
     <TextView
         android:id="@+id/name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="27dp"
         android:text="Name :"
         android:textColor="#FF000000"
         android:textSize="25dp"
@@ -61,24 +72,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/t_score_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="18dp"
-        android:text="Target Score :"
-        android:textColor="#FF000000"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PersonName" />
-
-    <TextView
         android:id="@+id/required1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="154dp"
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="35dp"
         android:text="required*"
         android:textColor="#BF0808"
         android:textSize="15dp"
@@ -87,17 +85,42 @@
         app:layout_constraintStart_toEndOf="@+id/name_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/required2"
+    <Button
+        android:id="@+id/next_button_input"
+        android:layout_width="0dp"
+        android:layout_height="63dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="41dp"
+        android:backgroundTint="#8D7B68"
+        android:gravity="center"
+        android:text="Next"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:iconPadding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView4" />
+
+    <Switch
+        android:id="@+id/hardSwitch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="78dp"
-        android:layout_marginTop="32dp"
-        android:text="required*"
-        android:textColor="#BF0808"
-        android:textSize="15dp"
+        android:text="Computer Hardplay"
+        android:textColor="#FF564735"
+        android:textSize="25dp"
         android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/t_score_tv"
-        app:layout_constraintTop_toBottomOf="@+id/PersonName" />
+        android:trackTint="#FF564735"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="269dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintEnd_toStartOf="@+id/next_button_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/target_score_input"
+        app:srcCompat="@drawable/new_dice" />
 </androidx.constraintlayout.widget.ConstraintLayout>

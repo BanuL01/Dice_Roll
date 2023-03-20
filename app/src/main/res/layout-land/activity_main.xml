@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6E1C3"
+    android:background="@drawable/bg4"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="333dp"
         android:layout_height="248dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="37dp"
         android:src="@drawable/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,10 +21,10 @@
         android:id="@+id/dice_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="74dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dice_black1" />
 
 

@@ -19,10 +19,12 @@ class game : AppCompatActivity() {
     var user_list = mutableListOf<Int>()
     var dice_select = mutableListOf<Boolean>(false,false,false,false,false)
     var round_count = 1
-    var win_count = 1
+    var win_count = 0
+    var lose_count = 0
     var user_dice_List: MutableList<ImageView>? =null
     var target_score = 101
     var isTie=false
+    var hard_level = false
 
 
 
@@ -30,6 +32,11 @@ class game : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+
+        win_count = intent.getIntExtra("win_count",0)
+        lose_count = intent.getIntExtra("lose_count", 0)
+        hard_level = intent.getBooleanExtra("hard_switch", false)
+        println(hard_level)
 
         val ts_input : TextView = findViewById(R.id.ts_value)
         val name_id : TextView = findViewById(R.id.user_text)
@@ -41,9 +48,10 @@ class game : AppCompatActivity() {
         val throw_button : Button = findViewById(R.id.throw_button)
         val score : Button = findViewById(R.id.score)
         val round_number : TextView = findViewById(R.id.round_num)
-
-
-
+        val H_text : TextView = findViewById(R.id.H)
+        val C_text : TextView = findViewById(R.id.C)
+        H_text.setText("H : "+ win_count.toString())
+        C_text.setText("C : "+ lose_count.toString())
 
         val com_d1 : ImageView = findViewById(R.id.com_d1)
         val com_d2 : ImageView = findViewById(R.id.com_d2)
@@ -65,7 +73,6 @@ class game : AppCompatActivity() {
         round_number.setText(round_count.toString())
 
         throw_button.setOnClickListener {
-            computer_list = genarateList()
             if (!isTie){
                 score.isEnabled = true
             }
@@ -73,18 +80,19 @@ class game : AppCompatActivity() {
 
             if(throw_button.text == "Throw") {
                 user_list = genarateList()
+                computer_list = genarateList()
                 if (!isTie){
                     throw_button.setText("Rethrow")
                     for (i in 0 until 5){
-                        user_dice_List!![i].isClickable = true
+                        user_dice_List!![i].isClickable = true  //
                     }
                 }
             }
 
-
             else if (throw_button.text == "Rethrow"){
                 throw_button.setText("Rethrow Again")
 
+                //updating dices again randomly
                 for (i in 0 until 5){
                     if (dice_select[i] == false){
                         var rannum = Random().nextInt(6) + 1
@@ -93,6 +101,14 @@ class game : AppCompatActivity() {
                 }
             }
              else {
+                if (hard_level == true){
+                    hardComputerPlayerStrategy()
+                }
+                else{
+                    ComputerRandom()
+                    ComputerRandom()
+                }
+
                 score.isEnabled = false
                 round_count++
                 round_number.setText(round_count.toString()) //setting the round number
@@ -104,7 +120,7 @@ class game : AppCompatActivity() {
                     user_dice_List!![i].isClickable = false
                 }
 
-
+                //giving random values to the non selected dices
                 for (i in 0 until 5){
                     if (dice_select[i] == false){
                         var rannum = Random().nextInt(6) + 1
@@ -133,17 +149,29 @@ class game : AppCompatActivity() {
                 winCheck()
 
             }
-            println(computer_list)
-            println(user_list)
 
             for (diceIndex in 0 until 5){
                 setImage(com_dice_list[diceIndex],computer_list[diceIndex])
                 setImage(user_dice_List!![diceIndex],user_list[diceIndex])
             }
-
         }
 
         score.setOnClickListener {
+            if (hard_level == true){
+                hardComputerPlayerStrategy()
+                println("hard")
+            }
+            else{
+                ComputerRandom()
+                ComputerRandom()
+                println("ezy")
+            }
+
+            //set image
+            for (diceIndex in 0 until 5){
+                setImage(com_dice_list[diceIndex],computer_list[diceIndex])
+            }
+
             updateScore()
             round_count++
             round_number.setText(round_count.toString()) //setting the round number
@@ -158,15 +186,12 @@ class game : AppCompatActivity() {
                 user_dice_List!![i].isClickable = false
             }
 
+
             com_score_text.setText(com_total.toString())
             user_score_text.setText(user_total.toString())
 
 
             winCheck()
-
-            println(com_total)
-            println(user_total)
-
 
         }
         for (i in 0 until 5){
@@ -178,20 +203,25 @@ class game : AppCompatActivity() {
     }
 
     private fun winCheck() {
-//        user_total = 200
+//        user_total = 200  // tie check
 //        com_total = 200
 
         if (user_total >= target_score || com_total >= target_score) {
             if (user_total > com_total) {
+                win_count ++
                 val dialog = Dialog(this)
                 dialog.setContentView(R.layout.activity_result)
                 dialog.setCancelable(true)
                 dialog.setCanceledOnTouchOutside(false)
                 dialog.setOnCancelListener {
-                    finish()
+                    val intent = Intent(this, options::class.java)
+                    intent.putExtra("win_count",win_count)
+                    intent.putExtra("lose_count",lose_count)
+                    startActivity(intent)
                 }
                 dialog.show()
             } else if (user_total < com_total) {
+                lose_count ++
                 val dialog = Dialog(this)
                 dialog.setContentView(R.layout.activity_result)
                 val resultText = dialog.findViewById<TextView>(R.id.win_text)
@@ -200,7 +230,11 @@ class game : AppCompatActivity() {
                 dialog.setCancelable(true)
                 dialog.setCanceledOnTouchOutside(false)
                 dialog.setOnCancelListener {
-                    finish()
+                    val intent = Intent(this, options::class.java)
+                    intent.putExtra("win_count",win_count)
+                    intent.putExtra("lose_count",lose_count)
+                    startActivity(intent)
+
                 }
                 dialog.show()
 
@@ -209,6 +243,8 @@ class game : AppCompatActivity() {
             }
         }
     }
+
+    //function to select dices
     private fun selectImage(index: Int) {
         if (dice_select[index] == false){
             dice_select[index] = true
@@ -220,6 +256,7 @@ class game : AppCompatActivity() {
         }
     }
 
+    //function to update the computer and user totals
     private fun updateScore() {
         for (itemIndex in 0 .. 4) {
             com_total += computer_list[itemIndex]
@@ -227,6 +264,7 @@ class game : AppCompatActivity() {
         }
     }
 
+    // setting values to the dice images
     private fun setImage(image: ImageView, randomValue: Int) {
         if (randomValue==1){
             image.setImageResource(R.drawable.dice_1)
@@ -253,6 +291,84 @@ class game : AppCompatActivity() {
         return  temp_list
     }
 
+    fun ComputerRandom(){
+        val randomBoolean = if (Random().nextInt(2) == 0) false else true
+        var com_random = mutableListOf(if (Random().nextInt(2) == 0) false else true,if (Random().nextInt(2) == 0) false else true,if (Random().nextInt(2) == 0) false else true,if (Random().nextInt(2) == 0) false else true,if (Random().nextInt(2) == 0) false else true)
+
+        if (randomBoolean){
+            //giving random values to the non selected dices
+            for (i in 0 until 5){
+                if (com_random[i] == false){
+                    var rannum = Random().nextInt(6) + 1
+                    computer_list[i] = rannum
+                }
+            }
+        }
+
+    }
+
+
+    private fun hardComputerPlayerStrategy() {
+        var tempcomputerscore=com_total
+        var gap = user_total - tempcomputerscore
+
+        //throw
+        if (gap > 20){
+            //high
+            //checking high values
+            for (count in  0 ..4){
+                var randomindex = random.nextInt(5)
+                if (computer_list[randomindex] <= 3){
+                    computer_list[randomindex]=random.nextInt(6) + 1
+                }
+            }
+        }else if(gap < 20){
+            ComputerRandom()
+            ComputerRandom()
+        }else {
+            //normal
+            ComputerRandom()
+            for (count in  0 ..4){
+                var randomindex = random.nextInt(5)
+                if (computer_list[randomindex] <= 2){
+                    computer_list[randomindex]=random.nextInt(6) + 1
+                }
+            }
+        }
+
+        for (i in 0..4) {
+            tempcomputerscore += computer_list[i]
+        }
+
+        //second throw
+        if ((tempcomputerscore<(user_total+10))){
+            var gap = user_total - tempcomputerscore
+
+            if (gap > 20){
+                //high
+                //checking high values
+                for (count in  0 ..4){
+                    var randomindex = random.nextInt(5) + 1
+                    if (computer_list[randomindex] <= 3){
+                        computer_list[randomindex]=random.nextInt(6) + 1
+                    }
+                }
+            }else if(gap < 20){
+                ComputerRandom()
+                ComputerRandom()
+            }else {
+                //normal
+                //normal
+                ComputerRandom()
+                for (count in  0 ..4){
+                    var randomindex = random.nextInt(5) + 1
+                    if (computer_list[randomindex] <= 2){
+                        computer_list[randomindex]=random.nextInt(6) + 1
+                    }
+                }
+            }
+        }
+    }
 
 
 }

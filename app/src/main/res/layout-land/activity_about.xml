@@ -5,7 +5,7 @@
     android:layout_width="600dp"
     android:layout_height="350dp"
     android:layout_gravity="center"
-    android:background="#F9F5E7"
+    android:background = "@drawable/bg1"
     tools:context=".about"
     tools:layout_editor_absoluteX="-93dp"
     tools:layout_editor_absoluteY="-12dp">
@@ -27,6 +27,7 @@
         android:layout_height="250dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="172dp"
+        android:textStyle="bold"
         android:text="I confirm that I understand what plagiarism is and have read and
 understood the section on Assessment Offences in the Essential
 Information for Students. The work that I have submitted is

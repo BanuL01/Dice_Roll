@@ -4,32 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6E1C3"
+    android:background="@drawable/bg6"
     tools:context=".options">
-
-    <Button
-        android:id="@+id/new_game"
-        android:layout_width="178dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="288dp"
-        android:backgroundTint="#8D7B68"
-        android:text="New game"
-        android:textColor="#F1DEC9"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:iconPadding="10dp"
-        app:iconTint="#B6FF9E80"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="#FFD180" />
 
     <Button
         android:id="@+id/about"
         android:layout_width="178dp"
         android:layout_height="63dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#8D7B68"
         android:text="About"
         android:textColor="#F1DEC9"
@@ -38,14 +21,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_game" />
 
-    <ImageView
-        android:layout_width="440dp"
-        android:layout_height="380dp"
-        android:layout_marginStart="-5dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/option_dice"
+    <Button
+        android:id="@+id/new_game"
+        android:layout_width="178dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="76dp"
+        android:backgroundTint="#8D7B68"
+        android:text="New game"
+        android:textColor="#F1DEC9"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:iconPadding="10dp"
+        app:iconTint="#B6FF9E80"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:rippleColor="#FFD180" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="687dp"
+        android:layout_height="606dp"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="-100dp"
+        android:src="@drawable/option_dice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
