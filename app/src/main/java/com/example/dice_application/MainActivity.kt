@@ -8,6 +8,8 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.ProgressBar
 
+// video demonstration link - https://drive.google.com/drive/folders/1zxvP7r-tBn5oxLoXrOT63Jjg3HAb1Sen?usp=sharing
+// w1867098 - Banuji Liyanwala
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

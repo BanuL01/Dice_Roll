@@ -75,14 +75,9 @@ class options : AppCompatActivity() {
                     startActivity(intent)
                     dialog.dismiss()
 
-
-
                 }
             }
             dialog.show()
         }
-
-
-
     }
 }
