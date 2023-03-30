@@ -102,7 +102,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView4" />
 
     <Switch
-        android:id="@+id/hardSwitch1"
+        android:id="@+id/hardSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Computer Hardplay"
